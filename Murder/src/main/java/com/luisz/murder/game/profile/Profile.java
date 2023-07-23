@@ -1,12 +1,14 @@
 package com.luisz.murder.game.profile;
 
 import com.luisz.lapi.player.skin.Skin;
+import com.luisz.luisz576api.domain.playerprofile.PlayerProfile;
 import com.luisz.murder.game.data.SkinData;
 import com.luisz.murder.game.enums.GamePlayerType;
 import org.bukkit.entity.Player;
 
 public class Profile {
     public final Player player;
+    public final PlayerProfile playerProfile;
     public GamePlayerType type = GamePlayerType.NONE;
     public void _setType(GamePlayerType type){
         this.type = type;
@@ -36,7 +38,8 @@ public class Profile {
         s.apply(this.player);
     }
 
-    public Profile(Player player){
+    public Profile(Player player, PlayerProfile playerProfile){
         this.player = player;
+        this.playerProfile = playerProfile;
     }
 }

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="LApi">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../LApi.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

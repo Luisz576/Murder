@@ -1,0 +1,5 @@
+main: com.luisz.murder.Main
+version: 1.0
+name: Murder
+api-version: 1.16
+depend: [LApi, Luisz576Api]
