@@ -5,7 +5,6 @@ import com.luisz.lapi.game.exception.GameNotRegisteredException;
 import com.luisz.murder.arena.Arena;
 import com.luisz.murder.game.enums.GameState;
 import com.luisz.murder.game.enums.GameStopReason;
-import com.luisz.murder.game.listener.GameListener;
 import com.luisz.murder.game.manager.CoinsManager;
 import com.luisz.murder.game.manager.PlayersManager;
 import com.luisz.murder.game.manager.ProfileInventoryManager;
@@ -21,15 +20,17 @@ public class Game extends IGame {
     public GameState getGameState(){
         return this.runner.getGameState();
     }
-    private final ProfileInventoryManager profileInventoryManager;
-    private final PlayersManager playersManager = new PlayersManager();
-    protected CoinsManager coinsManager = new CoinsManager();
+    protected final ProfileInventoryManager profileInventoryManager;
+    private final PlayersManager playersManager;
+    protected CoinsManager coinsManager;
 
     public Game(Arena arena) throws GameNotRegisteredException {
         super();
         this.arena = arena;
         this.runner = new GameRunner(this);
+        this.playersManager = new PlayersManager(this);
         this.profileInventoryManager = new ProfileInventoryManager(this);
+        this.coinsManager = new CoinsManager(this, this.playersManager, arena.getCoinsSpawns());
         this.gameListener = new GameListener(this);
         MurderPluginManager.registerListener(gameListener);
     }
@@ -41,7 +42,7 @@ public class Game extends IGame {
 
     @Override
     public boolean isPlayer(Player player) {
-        return playersManager.contains(player);
+        return playersManager.containsLikePlayer(player);
     }
     public boolean isFromGameLikePlayer(Player player){
         Profile profile = playersManager.getProfile(player);

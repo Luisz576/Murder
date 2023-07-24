@@ -25,19 +25,19 @@ public class ProfileInventoryManager {
                 p.getInventory().setItem(0, gameItems.build(
                     GameItem.SWORD,
                     1,
-                    profile.playerProfile.language.getLikeLanguage()
+                    profile.getLanguage()
                 ));
                 break;
             case DETECTIVE:
                 p.getInventory().setItem(0, gameItems.build(
                         GameItem.PISTOL,
                         1,
-                        profile.playerProfile.language.getLikeLanguage()
+                        profile.getLanguage()
                 ));
                 p.getInventory().setItem(0, gameItems.build(
                         GameItem.AMMO,
                         3,
-                        profile.playerProfile.language.getLikeLanguage()
+                        profile.getLanguage()
                 ));
                 break;
             case VICTIM:
@@ -47,7 +47,11 @@ public class ProfileInventoryManager {
         }
     }
 
-    public void buyAmmo(Profile profile){
-        //TODO
+    public void pickupCoin(Profile profile){
+        profile.player.getInventory().addItem(gameItems.build(
+            GameItem.COIN,
+            1,
+            profile.getLanguage()
+        ));
     }
 }

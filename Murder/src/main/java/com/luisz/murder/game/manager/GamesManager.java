@@ -5,7 +5,6 @@ import com.luisz.murder.arena.Arena;
 import com.luisz.murder.arena.configs.ArenasConfig;
 import com.luisz.murder.exceptions.ArenaAlreadyOpennedException;
 import com.luisz.murder.game.Game;
-import com.luisz.murder.game.enums.GamePlayerType;
 import com.luisz.murder.game.enums.GameStopReason;
 import com.luisz.murder.manager.MurderPluginManager;
 import org.bukkit.entity.Player;
@@ -15,14 +14,13 @@ import java.util.HashMap;
 public class GamesManager {
     private final HashMap<Arena, Game> games = new HashMap<>();
 
-    public GamePlayerType quitPlayer(Player player){
+    public boolean quitPlayer(Player player){
         for(Game game : games.values()){
-            GamePlayerType gpt = game.quitPlayer(player);
-            if(gpt != GamePlayerType.NONE){
-                return gpt;
+            if(game.quit(player)){
+                return true;
             }
         }
-        return GamePlayerType.NONE;
+        return false;
     }
 
     public boolean isPlayerInSomeArenaLikePlayer(Player player){
@@ -39,8 +37,8 @@ public class GamesManager {
             throw new ArenaAlreadyOpennedException();
         }
         ArenasConfig arenasConfig = MurderPluginManager.getArenasConfig();
-        if(arenasConfig.containsArena(arenaS)){
-            Arena arena = arenasConfig.load(arenaS);
+        Arena arena = arenasConfig.getArena(arenaS);
+        if(arena != null){
             try{
                 games.put(arena, new Game(arena));
                 return true;

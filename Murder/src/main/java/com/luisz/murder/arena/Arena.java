@@ -3,10 +3,7 @@ package com.luisz.murder.arena;
 import com.luisz.lapi.common.math.vector.UnmodifiableVector3D;
 import com.luisz.murder.game.data.SkinData;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Arena {
     public final String NAME, WORLD;
@@ -16,7 +13,7 @@ public class Arena {
         return Collections.unmodifiableList(skins);
     }
     private final List<UnmodifiableVector3D> spawns = new ArrayList<>();
-    public List<UnmodifiableVector3D> getSpawn(){
+    public List<UnmodifiableVector3D> getSpawns(){
         return Collections.unmodifiableList(spawns);
     }
     private final List<UnmodifiableVector3D> coinsSpawns = new ArrayList<>();
@@ -29,12 +26,24 @@ public class Arena {
              Collection<SkinData> skins,
              Collection<UnmodifiableVector3D> spawns,
              Collection<UnmodifiableVector3D> coinsSpawns){
-        this.NAME = NAME;
+        this.NAME = NAME.toLowerCase(Locale.ROOT);
         this.WORLD = WORLD;
         this.MIN_PLAYERS = MIN_PLAYERS;
         this.MAX_PLAYERS = MAX_PLAYERS;
         this.skins.addAll(skins);
         this.spawns.addAll(spawns);
         this.coinsSpawns.addAll(coinsSpawns);
+    }
+
+    public Arena createNew(){
+        return new Arena(
+            this.NAME,
+            this.WORLD,
+            this.MIN_PLAYERS,
+            this.MAX_PLAYERS,
+            this.skins,
+            this.spawns,
+            this.coinsSpawns
+        );
     }
 }

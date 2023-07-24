@@ -7,10 +7,10 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 
 public enum GameItem {
-    SWORD(Material.IRON_SWORD, ChatColor.DARK_GRAY, Texts.ITEM_SWORD.get()),
-    PISTOL(Material.BOW, ChatColor.DARK_PURPLE, Texts.ITEM_PISTOL.get()),
-    AMMO(Material.ARROW, ChatColor.YELLOW, Texts.ITEM_AMMO.get()),
-    COIN(Material.EMERALD, ChatColor.GREEN, Texts.ITEM_COIN.get());
+    SWORD(Material.IRON_SWORD, ChatColor.DARK_GRAY, Texts.ITEM_SWORD.getMultipleLanguageString()),
+    PISTOL(Material.BOW, ChatColor.DARK_PURPLE, Texts.ITEM_PISTOL.getMultipleLanguageString()),
+    AMMO(Material.ARROW, ChatColor.YELLOW, Texts.ITEM_AMMO.getMultipleLanguageString()),
+    COIN(Material.EMERALD, ChatColor.GREEN, Texts.ITEM_COIN.getMultipleLanguageString());
 
     public final Material material;
     public final ChatColor colorName;

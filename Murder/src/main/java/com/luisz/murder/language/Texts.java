@@ -22,19 +22,49 @@ public enum Texts {
     )),
     ITEM_AMMO(MultipleLanguageString.builder(
             new Tuple<>(Language.EN, "Ammo"),
-            new Tuple<>(Language.PT, "Municao"),
+            new Tuple<>(Language.PT, "Munição"),
             new Tuple<>(Language.ES, "Municion")
     )),
     ITEM_COIN(MultipleLanguageString.builder(
             new Tuple<>(Language.EN, "Coin"),
             new Tuple<>(Language.PT, "Moeda"),
             new Tuple<>(Language.ES, "moneda")
-    ))
+    )),
+    // GAME_RUNNING
+    GAME_RUNNING_PICKUP_COIN(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "[+1] Coin"),
+            new Tuple<>(Language.PT, "[+1] Moeda"),
+            new Tuple<>(Language.ES, "[+1] Moneda")
+    )),
+    // GAME_MESSAGE
+    GAME_MESSAGE_PLAYER_JOIN_LIKE_PLAYER(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Player %PLAYER% has joined!"),
+            new Tuple<>(Language.PT, "Jogador %PLAYER% entrou!"),
+            new Tuple<>(Language.ES, "El jugador %PLAYER% se ha unido!")
+    )),
+    GAME_MESSAGE_PLAYER_JOIN_LIKE_SPECTATOR(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Player %PLAYER% is watching!"),
+            new Tuple<>(Language.PT, "Jogador %PLAYER% está assistindo!"),
+            new Tuple<>(Language.ES, "El jugador %PLAYER% está mirando!")
+    )),
+    GAME_MESSAGE_PLAYER_QUIT_LIKE_PLAYER(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Player %PLAYER% has quited!"),
+            new Tuple<>(Language.PT, "Jogador %PLAYER% abandonou a partida!"),
+            new Tuple<>(Language.ES, "El jugador %PLAYER% ha abandonado el partido!")
+    )),
+    GAME_MESSAGE_PLAYER_QUIT_LIKE_SPECTATOR(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Player %PLAYER% is no longer watching!"),
+            new Tuple<>(Language.PT, "Jogador %PLAYER% não está mais assistindo!"),
+            new Tuple<>(Language.ES, "El jugador %PLAYER% ya no está viendo!")
+    )),
     ;
 
     private final MultipleLanguageString text;
-    public final MultipleLanguageString get(){
+    public final MultipleLanguageString getMultipleLanguageString(){
         return this.text.createNew();
+    }
+    public final String getString(Language language){
+        return this.text.getString(language);
     }
     Texts(MultipleLanguageString text){
         this.text = text;
