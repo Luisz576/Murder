@@ -36,26 +36,31 @@ public enum Texts {
             new Tuple<>(Language.PT, "[+1] Moeda"),
             new Tuple<>(Language.ES, "[+1] Moneda")
     )),
+    GAME_RUNNING_PLAYER_DIE(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, TextsVar.FIRST_PLAYER_NAME.VAR_NAME + " was killed by " + TextsVar.SECOND_PLAYER_NAME + "!"),
+            new Tuple<>(Language.PT, TextsVar.FIRST_PLAYER_NAME.VAR_NAME + " foi morto por " + TextsVar.SECOND_PLAYER_NAME + "!"),
+            new Tuple<>(Language.ES, TextsVar.FIRST_PLAYER_NAME.VAR_NAME + " fue asesinada por " + TextsVar.SECOND_PLAYER_NAME + "!")
+    )),
     // GAME_MESSAGE
     GAME_MESSAGE_PLAYER_JOIN_LIKE_PLAYER(MultipleLanguageString.builder(
-            new Tuple<>(Language.EN, "Player %PLAYER% has joined!"),
-            new Tuple<>(Language.PT, "Jogador %PLAYER% entrou!"),
-            new Tuple<>(Language.ES, "El jugador %PLAYER% se ha unido!")
+            new Tuple<>(Language.EN, "Player " + TextsVar.FIRST_PLAYER_NAME + " has joined!"),
+            new Tuple<>(Language.PT, "Jogador " + TextsVar.FIRST_PLAYER_NAME + " entrou!"),
+            new Tuple<>(Language.ES, "El jugador " + TextsVar.FIRST_PLAYER_NAME + " se ha unido!")
     )),
     GAME_MESSAGE_PLAYER_JOIN_LIKE_SPECTATOR(MultipleLanguageString.builder(
-            new Tuple<>(Language.EN, "Player %PLAYER% is watching!"),
-            new Tuple<>(Language.PT, "Jogador %PLAYER% está assistindo!"),
-            new Tuple<>(Language.ES, "El jugador %PLAYER% está mirando!")
+            new Tuple<>(Language.EN, "Player " + TextsVar.FIRST_PLAYER_NAME + " is watching!"),
+            new Tuple<>(Language.PT, "Jogador " + TextsVar.FIRST_PLAYER_NAME + " está assistindo!"),
+            new Tuple<>(Language.ES, "El jugador " + TextsVar.FIRST_PLAYER_NAME + " está mirando!")
     )),
     GAME_MESSAGE_PLAYER_QUIT_LIKE_PLAYER(MultipleLanguageString.builder(
-            new Tuple<>(Language.EN, "Player %PLAYER% has quited!"),
-            new Tuple<>(Language.PT, "Jogador %PLAYER% abandonou a partida!"),
-            new Tuple<>(Language.ES, "El jugador %PLAYER% ha abandonado el partido!")
+            new Tuple<>(Language.EN, "Player " + TextsVar.FIRST_PLAYER_NAME + " has quited!"),
+            new Tuple<>(Language.PT, "Jogador " + TextsVar.FIRST_PLAYER_NAME + " abandonou a partida!"),
+            new Tuple<>(Language.ES, "El jugador " + TextsVar.FIRST_PLAYER_NAME + " ha abandonado el partido!")
     )),
     GAME_MESSAGE_PLAYER_QUIT_LIKE_SPECTATOR(MultipleLanguageString.builder(
-            new Tuple<>(Language.EN, "Player %PLAYER% is no longer watching!"),
-            new Tuple<>(Language.PT, "Jogador %PLAYER% não está mais assistindo!"),
-            new Tuple<>(Language.ES, "El jugador %PLAYER% ya no está viendo!")
+            new Tuple<>(Language.EN, "Player " + TextsVar.FIRST_PLAYER_NAME + " is no longer watching!"),
+            new Tuple<>(Language.PT, "Jogador " + TextsVar.FIRST_PLAYER_NAME + " não está mais assistindo!"),
+            new Tuple<>(Language.ES, "El jugador " + TextsVar.FIRST_PLAYER_NAME + " ya no está viendo!")
     )),
     ;
 

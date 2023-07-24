@@ -6,6 +6,7 @@ import com.luisz.lapi.config.loader.ConfigLoader;
 import com.luisz.murder.arena.Arena;
 import com.luisz.murder.arena.configs.adapters.SkinsLoaderAdapter;
 import com.luisz.murder.arena.configs.adapters.UnmodifiableVector3DLoaderAdapter;
+import com.luisz.murder.exceptions.ArenaInvalidDataException;
 import com.luisz.murder.game.data.SkinData;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class ArenaLoader implements ConfigLoader<Arena> {
         List<SkinData> skins = lConfig.getCustomListValue(key + ".skins", skinsLoaderAdapter);
         // coins_spawns
         List<UnmodifiableVector3D> coinsSpawns = lConfig.getCustomListValue(key + ".coins_spawns", unmodifiableVector3DLoaderAdapter);
-        return new Arena(name, world, min_players, max_players, skins, spawns, coinsSpawns);
+        try{
+            return new Arena(name, world, min_players, max_players, skins, spawns, coinsSpawns);
+        }catch (ArenaInvalidDataException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

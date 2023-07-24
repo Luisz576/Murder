@@ -1,15 +1,20 @@
 package com.luisz.murder.game.manager;
 
+import com.luisz.lapi.common.tuple.Tuple;
 import com.luisz.luisz576api.api.Luisz576Api;
 import com.luisz.luisz576api.domain.playerprofile.PlayerProfile;
 import com.luisz.murder.exceptions.ErrorLoadingPlayerProfileException;
 import com.luisz.murder.game.Game;
 import com.luisz.murder.game.enums.GameState;
 import com.luisz.murder.game.profile.Profile;
+import com.luisz.murder.language.Texts;
+import com.luisz.murder.language.TextsVar;
+import com.luisz.murder.language.serializer.TextSerializer;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.Set;
+import java.util.List;
 
 public class PlayersManager {
     private final Game game;
@@ -19,34 +24,43 @@ public class PlayersManager {
         this.game = game;
     }
 
-    public void joinPlayer(Player player) throws ErrorLoadingPlayerProfileException{
+    public Profile joinPlayer(Player player) throws ErrorLoadingPlayerProfileException{
         try{
             PlayerProfile playerProfile = Luisz576Api.getApi().getProfile(player.getUniqueId());
             if(playerProfile == null){
                 throw new Exception("PlayerProfile not found");
             }
-            this.profiles.put(player, new Profile(player, playerProfile, (
+            Profile profile = new Profile(player, playerProfile, (
                 this.profiles.size() < game.arena.MAX_PLAYERS || game.getGameState() != GameState.RECRUITING
-            )));
+            ));
+            this.profiles.put(player, profile);
+            return profile;
         }catch (Exception e){
             e.printStackTrace();
             throw new ErrorLoadingPlayerProfileException();
         }
     }
-    public boolean containsLikePlayer(Player player){
+    public boolean contains(Player player){
         return this.profiles.containsKey(player);
     }
     public Profile getProfile(Player player){
         return this.profiles.get(player);
     }
-    public Profile removeProfile(Player player){
+    public Profile quitPlayer(Player player){
         return this.profiles.remove(player);
     }
 
-    public void sendMessageForEveryone(String message){
-        Set<Player> players = profiles.keySet();
-        for(Player p : players){
-            p.sendMessage(message);
+    protected Collection<Profile> getAllProfiles(){
+        return this.profiles.values();
+    }
+    public void sendMessageForEveryone(Texts texts, List<Tuple<TextsVar, String>> vars, String pre){
+        Collection<Profile> ps = profiles.values();
+        for(Profile p : ps){
+            p.sendMessage(pre + TextSerializer.a(
+                texts,
+                p.getLanguage(),
+                vars
+            ));
         }
     }
 }

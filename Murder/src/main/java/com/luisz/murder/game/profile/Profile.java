@@ -5,6 +5,8 @@ import com.luisz.lapi.player.skin.Skin;
 import com.luisz.luisz576api.domain.playerprofile.PlayerProfile;
 import com.luisz.murder.game.data.SkinData;
 import com.luisz.murder.game.enums.GamePlayerType;
+import com.luisz.murder.manager.MurderPluginManager;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 public class Profile {
@@ -22,10 +24,32 @@ public class Profile {
     public void addCoin(){
         this.coins++;
     }
+    private boolean isAlive = true;
+    public boolean isAlive(){
+        return this.isAlive;
+    }
+    public void kill(){
+        isAlive = false;
+    }
 
-    private SkinData skin;
-    public SkinData getSkin(){
+    private SkinData skin = null;
+    public SkinData getSkinData(){
         return this.skin;
+    }
+    public String getFakeName(){
+        if(skin == null){
+            return null;
+        }
+        return this.skin.nickname;
+    }
+    public void clearSkin(){
+        this.skin = null;
+        Skin s = Skin.fromName(this.playerProfile.skin);
+        if(s == null){
+            MurderPluginManager.sendPluginConsoleMessage(ChatColor.RED + "Player '" + this.player.getName() + "' hasn't a skin!");
+            return;
+        }
+        s.apply(this.player);
     }
     public void updateSkin(SkinData skin){
         this.skin = skin;
@@ -37,6 +61,7 @@ public class Profile {
             return;
         }
         s.apply(this.player);
+        this.player.setDisplayName(this.skin.nickname);
     }
 
     public Profile(Player player, PlayerProfile playerProfile, boolean isSpectator){
