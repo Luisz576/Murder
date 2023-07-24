@@ -4,6 +4,7 @@ import com.luisz.lapi.game.exception.GameNotRegisteredException;
 import com.luisz.murder.arena.Arena;
 import com.luisz.murder.arena.configs.ArenasConfig;
 import com.luisz.murder.exceptions.ArenaAlreadyOpennedException;
+import com.luisz.murder.exceptions.ArenaDoesntExistException;
 import com.luisz.murder.game.Game;
 import com.luisz.murder.game.enums.GameStopReason;
 import com.luisz.murder.manager.MurderPluginManager;
@@ -32,7 +33,7 @@ public class GamesManager {
         return false;
     }
 
-    public boolean startArena(String arenaS) throws ArenaAlreadyOpennedException{
+    public boolean startArena(String arenaS) throws ArenaAlreadyOpennedException, ArenaDoesntExistException{
         if(isArenaOpen(arenaS)){
             throw new ArenaAlreadyOpennedException();
         }
@@ -44,9 +45,10 @@ public class GamesManager {
                 return true;
             }catch (GameNotRegisteredException e){
                 e.printStackTrace();
+                return false;
             }
         }
-        return false;
+        throw new ArenaDoesntExistException();
     }
 
     public boolean stopArena(String arena){
@@ -62,6 +64,15 @@ public class GamesManager {
         Game game = games.remove(target);
         game.stopGame(GameStopReason.SYSTEM);
         return true;
+    }
+
+    public boolean joinPlayerIn(Player player, String arena){
+        for(Game game : this.games.values()){
+            if(game.arena.NAME.equalsIgnoreCase(arena)){
+                return game.join(player);
+            }
+        }
+        return false;
     }
 
     public boolean isArenaOpen(String arena){

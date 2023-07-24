@@ -33,5 +33,8 @@ public class Main extends LPlugin {
 
     public void _registerCommands(){
         Commands commands = new Commands();
+        getCommand("murderstartarena").setExecutor(commands);
+        getCommand("murderstoparena").setExecutor(commands);
+        getCommand("murderjoin").setExecutor(commands);
     }
 }

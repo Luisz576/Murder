@@ -71,7 +71,7 @@ public class Profile {
     }
 
     public Language getLanguage(){
-        return this.playerProfile.language.getLikeLanguage();
+        return this.playerProfile.language;
     }
     public void sendMessage(String message){
         this.player.sendMessage(message);

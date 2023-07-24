@@ -3,3 +3,13 @@ version: 1.0
 name: Murder
 api-version: 1.16
 depend: [LApi, Luisz576Api]
+commands:
+  murderstartarena:
+    usage: /murderstartarena <arena>
+    description: Start an arena
+  murderstoparena:
+    usage: /murderstoparena <arena>
+    description: Stop an open arena
+  murderjoin:
+    usage: /murderjoin <arena>
+    description: Use to join in an open arena
