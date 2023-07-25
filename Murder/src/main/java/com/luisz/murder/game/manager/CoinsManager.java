@@ -1,6 +1,6 @@
 package com.luisz.murder.game.manager;
 
-import com.luisz.lapi.common.math.vector.UnmodifiableVector3D;
+import com.luisz.murder.arena.ArenaLocation;
 import com.luisz.murder.game.Game;
 import com.luisz.murder.game.events.PlayerPickupCoinEvent;
 import com.luisz.murder.game.profile.Profile;
@@ -16,13 +16,13 @@ import java.util.Map;
 public class CoinsManager {
     public final Game game;
     private final PlayersManager playersManager;
-    private final Map<UnmodifiableVector3D, Entity> spawnedCoins = new HashMap<>();
-    private final Map<UnmodifiableVector3D, Integer> coinsProbabilities = new HashMap<>();
+    private final Map<ArenaLocation, Entity> spawnedCoins = new HashMap<>();
+    private final Map<ArenaLocation, Integer> coinsProbabilities = new HashMap<>();
 
-    public CoinsManager(Game game, PlayersManager playersManager, List<UnmodifiableVector3D> coinsSpawns){
+    public CoinsManager(Game game, PlayersManager playersManager, List<ArenaLocation> coinsSpawns){
         this.game = game;
         this.playersManager = playersManager;
-        for(UnmodifiableVector3D coinSpawn : coinsSpawns){
+        for(ArenaLocation coinSpawn : coinsSpawns){
             coinsProbabilities.put(coinSpawn, 100);
         }
     }
@@ -44,8 +44,8 @@ public class CoinsManager {
         return false;
     }
     public boolean pickupCoin(Player player, Entity coin){
-        UnmodifiableVector3D target = null;
-        for(Map.Entry<UnmodifiableVector3D, Entity> c : spawnedCoins.entrySet()){
+        ArenaLocation target = null;
+        for(Map.Entry<ArenaLocation, Entity> c : spawnedCoins.entrySet()){
             if(c.getValue().getEntityId() == coin.getEntityId()){
                target = c.getKey();
             }

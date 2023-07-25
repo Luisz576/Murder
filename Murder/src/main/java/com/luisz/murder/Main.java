@@ -36,5 +36,6 @@ public class Main extends LPlugin {
         getCommand("murderstartarena").setExecutor(commands);
         getCommand("murderstoparena").setExecutor(commands);
         getCommand("murderjoin").setExecutor(commands);
+        getCommand("murderarenaedit").setExecutor(commands);
     }
 }

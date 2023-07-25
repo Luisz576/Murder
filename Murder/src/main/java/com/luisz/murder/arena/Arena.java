@@ -1,6 +1,5 @@
 package com.luisz.murder.arena;
 
-import com.luisz.lapi.common.math.vector.UnmodifiableVector3D;
 import com.luisz.murder.exceptions.ArenaInvalidDataException;
 import com.luisz.murder.game.data.SkinData;
 
@@ -13,20 +12,20 @@ public class Arena {
     public List<SkinData> getSkins(){
         return Collections.unmodifiableList(skins);
     }
-    private final List<UnmodifiableVector3D> spawns = new ArrayList<>();
-    public List<UnmodifiableVector3D> getSpawns(){
+    private final List<ArenaLocation> spawns = new ArrayList<>();
+    public List<ArenaLocation> getSpawns(){
         return Collections.unmodifiableList(spawns);
     }
-    private final List<UnmodifiableVector3D> coinsSpawns = new ArrayList<>();
-    public List<UnmodifiableVector3D> getCoinsSpawns(){
+    private final List<ArenaLocation> coinsSpawns = new ArrayList<>();
+    public List<ArenaLocation> getCoinsSpawns(){
         return Collections.unmodifiableList(coinsSpawns);
     }
 
     public Arena(String NAME, String WORLD,
              int MIN_PLAYERS, int MAX_PLAYERS,
              Collection<SkinData> skins,
-             Collection<UnmodifiableVector3D> spawns,
-             Collection<UnmodifiableVector3D> coinsSpawns) throws ArenaInvalidDataException{
+             Collection<ArenaLocation> spawns,
+             Collection<ArenaLocation> coinsSpawns) throws ArenaInvalidDataException{
         this.NAME = NAME.toLowerCase(Locale.ROOT);
         this.WORLD = WORLD;
         this.MIN_PLAYERS = MIN_PLAYERS;

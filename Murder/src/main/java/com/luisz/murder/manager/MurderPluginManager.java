@@ -1,6 +1,7 @@
 package com.luisz.murder.manager;
 
 import com.luisz.murder.arena.configs.ArenasConfig;
+import com.luisz.murder.building.ArenaBuilding;
 import com.luisz.murder.exceptions.ArenasNotLoadedException;
 import com.luisz.murder.exceptions.SetupException;
 import com.luisz.murder.exceptions.UnsetupDeniedException;
@@ -20,6 +21,7 @@ public class MurderPluginManager {
     private static org.bukkit.plugin.PluginManager pm;
     private static GamesManager gamesManager;
     private static ArenasConfig arenasConfig;
+    private static ArenaBuilding arenaBuilding;
 
     public static Plugin getPlugin(){
         return plugin;
@@ -30,6 +32,9 @@ public class MurderPluginManager {
     public static ArenasConfig getArenasConfig(){
         return arenasConfig;
     }
+    public static ArenaBuilding getArenaBuilding(){
+        return arenaBuilding;
+    }
 
     public static void _setupPlugin(Plugin plugin, String pluginName) throws SetupException {
         MurderPluginManager.plugin = plugin;
@@ -37,6 +42,7 @@ public class MurderPluginManager {
         MurderPluginManager.cmd = Bukkit.getConsoleSender();
         MurderPluginManager.pm = Bukkit.getPluginManager();
         MurderPluginManager.gamesManager = new GamesManager();
+        MurderPluginManager.arenaBuilding = new ArenaBuilding();
         try{
             MurderPluginManager.arenasConfig = new ArenasConfig(plugin);
         }catch (ArenasNotLoadedException e){

@@ -72,6 +72,52 @@ public class Commands implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "Usage: /murderjoin <arena>");
                 }
                 return true;
+            case "murderarenaedit":
+                if(args.length > 0){
+                    String option = args[0].toLowerCase(Locale.ROOT);
+                    switch (option){
+                        case "start":
+                            if(args.length == 2){
+                                String arena = args[0].toLowerCase(Locale.ROOT);
+                                if(!MurderPluginManager.getArenasConfig().containsArena(arena)){
+                                    if(MurderPluginManager.getArenaBuilding().start(p, arena)) {
+                                        p.sendMessage(ChatColor.GREEN + "You are editing a new arena!");
+                                    }else{
+                                        p.sendMessage(ChatColor.RED + "There is someone editing a arena with this name!");
+                                    }
+                                }else{
+                                    p.sendMessage(ChatColor.RED + "An arena with this name already exists!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit start <arena>");
+                            }
+                            break;
+                        case "show":
+                            if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                p.sendMessage(ChatColor.GREEN + "Arena:\n" + MurderPluginManager.getArenaBuilding().getArenaInfo(p));
+                            }else{
+                                p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
+                            }
+                            break;
+                        case "build":
+                            if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                if(MurderPluginManager.getArenaBuilding().build(p)){
+                                    p.sendMessage(ChatColor.GREEN + "Arena created!");
+                                }else{
+                                    p.sendMessage(ChatColor.GREEN + "Can't create arena!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
+                            }
+                            break;
+                        default:
+                            p.sendMessage(ChatColor.RED + "This option doesn't exist!");
+                            break;
+                    }
+                }else{
+                    p.sendMessage(ChatColor.RED + "Usage: /murderarenaedit <option>");
+                }
+                return true;
         }
         return false;
     }

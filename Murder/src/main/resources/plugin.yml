@@ -13,3 +13,6 @@ commands:
   murderjoin:
     usage: /murderjoin <arena>
     description: Use to join in an open arena
+  murderarenaedit:
+    usage: /murderarenaedit <option>
+    description: Used to edit an new arena
