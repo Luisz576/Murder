@@ -36,6 +36,6 @@ public class ArenaEditing {
             + "\nMAX_PLAYERS: " + MAX_PLAYERS
             + "\nSPAWNS: " + SPAWNS.size()
             + "\nCOINS_SPAWNS: " + COINS_SPAWNS.size()
-            + "\nSPAWNS: " + SPAWNS.size();
+            + "\nSKINS: " + SKINS.size();
     }
 }

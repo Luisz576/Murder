@@ -16,3 +16,6 @@ commands:
   murderarenaedit:
     usage: /murderarenaedit <option>
     description: Used to edit an new arena
+  murderremovearena:
+    usage: /murderremovearena <arena>
+    description: Remove an arena

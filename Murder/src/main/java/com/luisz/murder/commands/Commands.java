@@ -205,6 +205,22 @@ public class Commands implements CommandExecutor {
                     p.sendMessage(ChatColor.RED + "Usage: /murderarenaedit <option>");
                 }
                 return true;
+            case "murderremovearena":
+                if(args.length == 1){
+                    String arena = args[0].toLowerCase(Locale.ROOT);
+                    if(MurderPluginManager.getArenasConfig().containsArena(arena)){
+                        if(MurderPluginManager.getArenasConfig().unregisterArena(arena)){
+                            p.sendMessage(ChatColor.GREEN + "Arena unregistered!");
+                        }else{
+                            p.sendMessage(ChatColor.RED + "Arena not removed!");
+                        }
+                    }else{
+                        p.sendMessage(ChatColor.RED + "Arena not founded!");
+                    }
+                }else{
+                    p.sendMessage(ChatColor.RED + "Usage: /murderremovearena <arena>");
+                }
+                return true;
         }
         return false;
     }
