@@ -1,5 +1,6 @@
 package com.luisz.murder.commands;
 
+import com.luisz.lapi.player.skin.Skin;
 import com.luisz.murder.exceptions.ArenaAlreadyOpennedException;
 import com.luisz.murder.exceptions.ArenaDoesntExistException;
 import com.luisz.murder.manager.MurderPluginManager;
@@ -78,9 +79,9 @@ public class Commands implements CommandExecutor {
                     switch (option){
                         case "start":
                             if(args.length == 2){
-                                String arena = args[0].toLowerCase(Locale.ROOT);
+                                String arena = args[1].toLowerCase(Locale.ROOT);
                                 if(!MurderPluginManager.getArenasConfig().containsArena(arena)){
-                                    if(MurderPluginManager.getArenaBuilding().start(p, arena)) {
+                                    if(MurderPluginManager.getArenaBuilding().start(p, arena, p.getWorld().getName())) {
                                         p.sendMessage(ChatColor.GREEN + "You are editing a new arena!");
                                     }else{
                                         p.sendMessage(ChatColor.RED + "There is someone editing a arena with this name!");
@@ -99,12 +100,82 @@ public class Commands implements CommandExecutor {
                                 p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
                             }
                             break;
+                        case "minmax":
+                            if(args.length == 3){
+                                int min = 0, max = 0;
+                                try{
+                                    min = Integer.parseInt(args[1]);
+                                    max = Integer.parseInt(args[2]);
+                                }catch (Exception ignored){}
+                                if(min > 1 && max > 1 && MurderPluginManager.getArenaBuilding().setMinAndMaxPlayers(p, min, max)){
+                                    p.sendMessage(ChatColor.GREEN + "Min and Max setted!");
+                                }else{
+                                    p.sendMessage(ChatColor.RED + "Invalid value(s) passed!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit minmax <min> <max>");
+                            }
+                            break;
+                        case "addskin":
+                            if(args.length == 3){
+                                String skin = args[1].toLowerCase(Locale.ROOT), nickname = args[2];
+                                if(Skin.fromName(skin) != null){
+                                    if(MurderPluginManager.getArenaBuilding().addSkin(p, skin, nickname)){
+                                        p.sendMessage(ChatColor.GREEN + "Skin added!");
+                                    }else{
+                                        p.sendMessage(ChatColor.RED + "This nickname already exist!");
+                                    }
+                                }else{
+                                    p.sendMessage(ChatColor.RED + "Invalid skin!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit minmax <min> <max>");
+                            }
+                            break;
+                        case "help":
+                            p.sendMessage(
+                                ChatColor.GREEN + "Usage: /murderarenaedit <option>" +
+                                "\n<options>:" +
+                                "\naddskin => add a skin" +
+                                "\naddspawn => add a spawn" +
+                                "\naddcoinspawn => add a coin spawn" +
+                                "\nbuild => Build and register arena" +
+                                "\nhelp => Show all commands" +
+                                "\nminmax => Set min and max of an arena" +
+                                "\nstart => Start editing a new arena" +
+                                "\nshow => Show current arena info"
+                            );
+                            break;
+                        case "addspawn":
+                            if(args.length == 2){
+                                String spawn_name = args[1].toLowerCase(Locale.ROOT);
+                                if(MurderPluginManager.getArenaBuilding().addSpawn(p, p.getLocation(), spawn_name)){
+                                    p.sendMessage(ChatColor.GREEN + "Spawn added!");
+                                }else{
+                                    p.sendMessage(ChatColor.RED + "Spawn already added!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit addspawn <spawn_name>");
+                            }
+                            break;
+                        case "addcoinspawn":
+                            if(args.length == 2){
+                                String coin_spawn_name = args[1].toLowerCase(Locale.ROOT);
+                                if(MurderPluginManager.getArenaBuilding().addCoinSpawn(p, p.getLocation(), coin_spawn_name)){
+                                    p.sendMessage(ChatColor.GREEN + "Coin spawn added!");
+                                }else{
+                                    p.sendMessage(ChatColor.RED + "Coin spawn already added!");
+                                }
+                            }else{
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit addcoinspawn <coin_spawn_name>");
+                            }
+                            break;
                         case "build":
                             if(MurderPluginManager.getArenaBuilding().isEditing(p)){
                                 if(MurderPluginManager.getArenaBuilding().build(p)){
                                     p.sendMessage(ChatColor.GREEN + "Arena created!");
                                 }else{
-                                    p.sendMessage(ChatColor.GREEN + "Can't create arena!");
+                                    p.sendMessage(ChatColor.RED + "Can't create arena!");
                                 }
                             }else{
                                 p.sendMessage(ChatColor.RED + "You aren't editing an arena!");

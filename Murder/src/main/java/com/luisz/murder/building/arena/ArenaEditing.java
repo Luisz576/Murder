@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ArenaEditing {
-    public final String NAME;
-    public String WORLD;
+    public final String NAME, WORLD;
     public int MIN_PLAYERS = 0, MAX_PLAYERS = 0;
     public final List<SkinData> SKINS = new ArrayList<>();
     public final List<ArenaLocation> SPAWNS = new ArrayList<>();
     public final List<ArenaLocation> COINS_SPAWNS = new ArrayList<>();
 
-    public ArenaEditing(String NAME){
+    public ArenaEditing(String NAME, String WORLD){
         this.NAME = NAME;
+        this.WORLD = WORLD;
     }
 
     public boolean isValidToBuild(){
@@ -31,11 +31,11 @@ public class ArenaEditing {
 
     public String toDataString(){
         return "NAME: " + NAME
-                + "\nWORLD: " + WORLD
-                + "\nMIN_PLAYERS: " + MIN_PLAYERS
-                + "\nMAX_PLAYERS: " + MAX_PLAYERS
-                + "\nSPAWNS: " + SPAWNS.size()
-                + "\nCOINS_SPAWNS: " + COINS_SPAWNS.size()
-                + "\nSPAWNS: " + SPAWNS.size();
+            + "\nWORLD: " + (WORLD == null ? "?" : WORLD)
+            + "\nMIN_PLAYERS: " + MIN_PLAYERS
+            + "\nMAX_PLAYERS: " + MAX_PLAYERS
+            + "\nSPAWNS: " + SPAWNS.size()
+            + "\nCOINS_SPAWNS: " + COINS_SPAWNS.size()
+            + "\nSPAWNS: " + SPAWNS.size();
     }
 }
