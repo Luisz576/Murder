@@ -102,15 +102,19 @@ public class Commands implements CommandExecutor {
                             break;
                         case "minmax":
                             if(args.length == 3){
-                                int min = 0, max = 0;
-                                try{
-                                    min = Integer.parseInt(args[1]);
-                                    max = Integer.parseInt(args[2]);
-                                }catch (Exception ignored){}
-                                if(min > 1 && max > 1 && MurderPluginManager.getArenaBuilding().setMinAndMaxPlayers(p, min, max)){
-                                    p.sendMessage(ChatColor.GREEN + "Min and Max setted!");
+                                if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                    int min = 0, max = 0;
+                                    try{
+                                        min = Integer.parseInt(args[1]);
+                                        max = Integer.parseInt(args[2]);
+                                    }catch (Exception ignored){}
+                                    if(min > 1 && max > 1 && MurderPluginManager.getArenaBuilding().setMinAndMaxPlayers(p, min, max)){
+                                        p.sendMessage(ChatColor.GREEN + "Min and Max setted!");
+                                    }else{
+                                        p.sendMessage(ChatColor.RED + "Invalid value(s) passed!");
+                                    }
                                 }else{
-                                    p.sendMessage(ChatColor.RED + "Invalid value(s) passed!");
+                                    p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
                                 }
                             }else{
                                 p.sendMessage(ChatColor.RED + "Use: /murderarenaedit minmax <min> <max>");
@@ -118,18 +122,22 @@ public class Commands implements CommandExecutor {
                             break;
                         case "addskin":
                             if(args.length == 3){
-                                String skin = args[1].toLowerCase(Locale.ROOT), nickname = args[2];
-                                if(Skin.fromName(skin) != null){
-                                    if(MurderPluginManager.getArenaBuilding().addSkin(p, skin, nickname)){
-                                        p.sendMessage(ChatColor.GREEN + "Skin added!");
+                                if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                    String skin = args[1].toLowerCase(Locale.ROOT), nickname = args[2];
+                                    if(Skin.fromName(skin) != null){
+                                        if(MurderPluginManager.getArenaBuilding().addSkin(p, skin, nickname)){
+                                            p.sendMessage(ChatColor.GREEN + "Skin added!");
+                                        }else{
+                                            p.sendMessage(ChatColor.RED + "This nickname already exist!");
+                                        }
                                     }else{
-                                        p.sendMessage(ChatColor.RED + "This nickname already exist!");
+                                        p.sendMessage(ChatColor.RED + "Invalid skin!");
                                     }
                                 }else{
-                                    p.sendMessage(ChatColor.RED + "Invalid skin!");
+                                    p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
                                 }
                             }else{
-                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit minmax <min> <max>");
+                                p.sendMessage(ChatColor.RED + "Use: /murderarenaedit addskin <skin> <nickname>");
                             }
                             break;
                         case "help":
@@ -148,11 +156,15 @@ public class Commands implements CommandExecutor {
                             break;
                         case "addspawn":
                             if(args.length == 2){
-                                String spawn_name = args[1].toLowerCase(Locale.ROOT);
-                                if(MurderPluginManager.getArenaBuilding().addSpawn(p, p.getLocation(), spawn_name)){
-                                    p.sendMessage(ChatColor.GREEN + "Spawn added!");
+                                if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                    String spawn_name = args[1].toLowerCase(Locale.ROOT);
+                                    if(MurderPluginManager.getArenaBuilding().addSpawn(p, p.getLocation(), spawn_name)){
+                                        p.sendMessage(ChatColor.GREEN + "Spawn added!");
+                                    }else{
+                                        p.sendMessage(ChatColor.RED + "Spawn already added!");
+                                    }
                                 }else{
-                                    p.sendMessage(ChatColor.RED + "Spawn already added!");
+                                    p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
                                 }
                             }else{
                                 p.sendMessage(ChatColor.RED + "Use: /murderarenaedit addspawn <spawn_name>");
@@ -160,11 +172,15 @@ public class Commands implements CommandExecutor {
                             break;
                         case "addcoinspawn":
                             if(args.length == 2){
-                                String coin_spawn_name = args[1].toLowerCase(Locale.ROOT);
-                                if(MurderPluginManager.getArenaBuilding().addCoinSpawn(p, p.getLocation(), coin_spawn_name)){
-                                    p.sendMessage(ChatColor.GREEN + "Coin spawn added!");
+                                if(MurderPluginManager.getArenaBuilding().isEditing(p)){
+                                    String coin_spawn_name = args[1].toLowerCase(Locale.ROOT);
+                                    if(MurderPluginManager.getArenaBuilding().addCoinSpawn(p, p.getLocation(), coin_spawn_name)){
+                                        p.sendMessage(ChatColor.GREEN + "Coin spawn added!");
+                                    }else{
+                                        p.sendMessage(ChatColor.RED + "Coin spawn already added!");
+                                    }
                                 }else{
-                                    p.sendMessage(ChatColor.RED + "Coin spawn already added!");
+                                    p.sendMessage(ChatColor.RED + "You aren't editing an arena!");
                                 }
                             }else{
                                 p.sendMessage(ChatColor.RED + "Use: /murderarenaedit addcoinspawn <coin_spawn_name>");
