@@ -1,11 +1,20 @@
 package com.luisz.murder.game;
 
+import com.luisz.lapi.common.tuple.Tuple;
 import com.luisz.murder.game.enums.GameState;
+import com.luisz.murder.game.enums.GameStopReason;
+import com.luisz.murder.language.Texts;
+import com.luisz.murder.language.TextsVar;
 import com.luisz.murder.manager.MurderPluginManager;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GameRunner implements Runnable{
     private final Game game;
+    protected int timer = 0;
     private GameState gameState = GameState.RECRUITING;
     public GameState getGameState(){
         return this.gameState;
@@ -34,14 +43,27 @@ public class GameRunner implements Runnable{
 
     @Override
     public void run() {
-        switch (game.getGameState()){
+        switch (this.gameState){
             case RECRUITING:
+                if(timer <= 0){
+                    game.runGame();
+                    break;
+                }
+                if(timer < 10){
+                    List<Tuple<TextsVar, String>> vars = new ArrayList<>();
+                    vars.add(new Tuple<>(TextsVar.FIRST_NUMBER, timer + ""));
+                    game.sendGameMessageForEveryone(Texts.GAME_MESSAGE_GAME_START_IN, vars, ChatColor.GREEN.toString());
+                }
                 break;
             case RUNNING:
                 game.coinsManager._gameTick();
+                if(timer <= 0){
+                    game.stopGame(GameStopReason.TIMEOUT);
+                }
                 break;
             case STOPPING:
                 break;
         }
+        timer--;
     }
 }

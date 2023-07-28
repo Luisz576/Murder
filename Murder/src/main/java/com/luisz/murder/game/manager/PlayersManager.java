@@ -5,6 +5,7 @@ import com.luisz.luisz576api.api.Luisz576Api;
 import com.luisz.luisz576api.domain.playerprofile.PlayerProfile;
 import com.luisz.murder.exceptions.ErrorLoadingPlayerProfileException;
 import com.luisz.murder.game.Game;
+import com.luisz.murder.game.enums.GamePlayerType;
 import com.luisz.murder.game.enums.GameState;
 import com.luisz.murder.game.profile.Profile;
 import com.luisz.murder.language.Texts;
@@ -12,6 +13,7 @@ import com.luisz.murder.language.TextsVar;
 import com.luisz.murder.language.serializer.TextSerializer;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -53,6 +55,21 @@ public class PlayersManager {
     protected Collection<Profile> getAllProfiles(){
         return this.profiles.values();
     }
+    protected Collection<Profile> getAllProfiles(boolean withoutSpectators){
+        Collection<Profile> ps = new ArrayList<>();
+        if(withoutSpectators) {
+            for(Profile p : this.profiles.values()){
+                if(p.type == GamePlayerType.SPECTATOR){
+                    continue;
+                }
+                ps.add(p);
+            }
+        }else{
+            ps.addAll(this.profiles.values());
+        }
+        return ps;
+    }
+
     public void sendMessageForEveryone(Texts texts, List<Tuple<TextsVar, String>> vars, String pre){
         Collection<Profile> ps = profiles.values();
         for(Profile p : ps){

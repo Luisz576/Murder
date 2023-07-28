@@ -21,9 +21,11 @@ public class PlayerSkinsManager {
         Collection<Profile> profiles = playersManager.getAllProfiles();
         List<SkinData> skinsToGive = new ArrayList<>(this.skins);
         for(Profile profile : profiles){
-            SkinData s = skinsToGive.get(LRandom.randomInt(skinsToGive.size()));
-            profile.updateSkin(s);
-            skinsToGive.remove(s);
+            if(profile.type.isGamePlayer()) {
+                SkinData s = skinsToGive.get(LRandom.randomInt(skinsToGive.size()));
+                profile.updateSkin(s);
+                skinsToGive.remove(s);
+            }
         }
     }
 

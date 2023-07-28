@@ -73,6 +73,9 @@ public class Profile {
     public Language getLanguage(){
         return this.playerProfile.language;
     }
+    public void sendTitle(String title){
+        // TODO
+    }
     public void sendMessage(String message){
         this.player.sendMessage(message);
     }

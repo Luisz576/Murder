@@ -19,6 +19,7 @@ public class ArenaLoader implements ConfigLoader<Arena> {
     public Arena load(LConfig lConfig, String key) {
         String name = lConfig.getString(key + ".name");
         String world = lConfig.getString(key + ".world");
+        arenaLocationLoaderAdapter.currentWorld = world;
         int min_players = lConfig.getInt(key + ".min_players");
         int max_players = lConfig.getInt(key + ".max_players");
         // spawns

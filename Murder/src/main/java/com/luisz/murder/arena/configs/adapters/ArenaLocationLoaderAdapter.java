@@ -6,10 +6,13 @@ import com.luisz.lapi.config.adapter.LoaderAdapter;
 import com.luisz.murder.arena.ArenaLocation;
 
 public class ArenaLocationLoaderAdapter implements LoaderAdapter<ArenaLocation> {
+    public String currentWorld = "";
+
     @Override
     public ArenaLocation load(LConfig lConfig, String key) {
         return new ArenaLocation(
             lConfig.getString(key + ".id"),
+            currentWorld,
             UnmodifiableVector3D.fromVector3D(lConfig.getVector3D(key + ".loc"))
         );
     }

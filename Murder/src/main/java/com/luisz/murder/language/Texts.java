@@ -9,6 +9,22 @@ import java.util.Collections;
 import java.util.List;
 
 public enum Texts {
+    // JOBS
+    DETECTIVE(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Detective"),
+            new Tuple<>(Language.PT, "Detetive"),
+            new Tuple<>(Language.ES, "Detetive")
+    )),
+    ASSASSIN(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Assassin"),
+            new Tuple<>(Language.PT, "Assassino"),
+            new Tuple<>(Language.ES, "Asesino")
+    )),
+    VICTIM(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Victim"),
+            new Tuple<>(Language.PT, "Vítima"),
+            new Tuple<>(Language.ES, "Víctima")
+    )),
     // ITEMS
     ITEM_SWORD(MultipleLanguageString.builder(
             new Tuple<>(Language.EN, "Knife"),
@@ -42,6 +58,11 @@ public enum Texts {
             new Tuple<>(Language.ES, TextsVar.FIRST_PLAYER_NAME.VAR_NAME + " fue asesinada por " + TextsVar.SECOND_PLAYER_NAME + "!")
     )),
     // GAME_MESSAGE
+    GAME_MESSAGE_GAME_START_IN(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Game starts in " + TextsVar.FIRST_NUMBER + " second(s)!"),
+            new Tuple<>(Language.PT, "O jogo começa em " + TextsVar.FIRST_NUMBER + " segundo(s)!"),
+            new Tuple<>(Language.ES, "El juego comienza en " + TextsVar.FIRST_NUMBER + " segundo(s)!")
+    )),
     GAME_MESSAGE_PLAYER_JOIN_LIKE_PLAYER(MultipleLanguageString.builder(
             new Tuple<>(Language.EN, "Player " + TextsVar.FIRST_PLAYER_NAME + " has joined!"),
             new Tuple<>(Language.PT, "Jogador " + TextsVar.FIRST_PLAYER_NAME + " entrou!"),

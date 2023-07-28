@@ -75,7 +75,7 @@ public class ArenaBuilding {
                 return false;
             }
         }
-        arenaEditing.SPAWNS.add(new ArenaLocation(spawn_name, new UnmodifiableVector3D(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
+        arenaEditing.SPAWNS.add(new ArenaLocation(spawn_name, arenaEditing.WORLD, new UnmodifiableVector3D(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
         return true;
     }
 
@@ -93,7 +93,7 @@ public class ArenaBuilding {
                 return false;
             }
         }
-        arenaEditing.COINS_SPAWNS.add(new ArenaLocation(coin_spawn_name, new UnmodifiableVector3D(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
+        arenaEditing.COINS_SPAWNS.add(new ArenaLocation(coin_spawn_name, arenaEditing.WORLD, new UnmodifiableVector3D(location.getBlockX(), location.getBlockY(), location.getBlockZ())));
         return true;
     }
 

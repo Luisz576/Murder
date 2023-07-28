@@ -10,9 +10,16 @@ import org.bukkit.entity.Player;
 public class ProfileInventoryManager {
     public final Game game;
     private final GameItems gameItems = new GameItems();
+    private final PlayersManager playersManager;
 
-    public ProfileInventoryManager(Game game){
+    public ProfileInventoryManager(Game game, PlayersManager playersManager){
         this.game = game;
+        this.playersManager = playersManager;
+    }
+    public void giveItemsForEveryone(){
+        for(Profile profile : playersManager.getAllProfiles()){
+            giveItems(profile);
+        }
     }
     public void giveItems(Profile profile){
         Player p = profile.player;

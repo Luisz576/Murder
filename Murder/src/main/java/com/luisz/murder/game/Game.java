@@ -10,10 +10,7 @@ import com.luisz.murder.game.enums.GameState;
 import com.luisz.murder.game.enums.GameStopReason;
 import com.luisz.murder.game.events.PlayerJoinTheGameEvent;
 import com.luisz.murder.game.events.PlayerQuitTheGameEvent;
-import com.luisz.murder.game.manager.CoinsManager;
-import com.luisz.murder.game.manager.PlayerSkinsManager;
-import com.luisz.murder.game.manager.PlayersManager;
-import com.luisz.murder.game.manager.ProfileInventoryManager;
+import com.luisz.murder.game.manager.*;
 import com.luisz.murder.game.profile.Profile;
 import com.luisz.murder.language.Texts;
 import com.luisz.murder.language.TextsVar;
@@ -36,6 +33,8 @@ public class Game extends IGame {
     private final PlayersManager playersManager;
     protected final CoinsManager coinsManager;
     private final PlayerSkinsManager playerSkinsManager;
+    private final JobsManager jobsManager;
+    private final TeleportManager teleportManager;
 
     public Game(Arena arena) throws GameNotRegisteredException {
         super();
@@ -43,7 +42,9 @@ public class Game extends IGame {
         this.runner = new GameRunner(this);
         this.playersManager = new PlayersManager(this);
         this.playerSkinsManager = new PlayerSkinsManager(arena.getSkins(), this.playersManager);
-        this.profileInventoryManager = new ProfileInventoryManager(this);
+        this.profileInventoryManager = new ProfileInventoryManager(this, this.playersManager);
+        this.jobsManager = new JobsManager(this.playersManager);
+        this.teleportManager = new TeleportManager(this.playersManager, this.arena.getSpawns());
         this.coinsManager = new CoinsManager(this, this.playersManager, arena.getCoinsSpawns());
         this.gameListener = new GameListener(this);
         MurderPluginManager.registerListener(gameListener);
@@ -77,6 +78,16 @@ public class Game extends IGame {
             }
         }
         return false;
+    }
+
+    // states
+    protected void runGame(){
+        this.runner.setGameState(GameState.RUNNING);
+        this.teleportManager.spawnEveryone();
+        this.jobsManager.giveJobs();
+        this.playerSkinsManager.giveRandomSkinsForEveryone();
+        this.profileInventoryManager.giveItemsForEveryone();
+        // TODO
     }
 
     @Override
