@@ -1,6 +1,6 @@
 package com.luisz.murder.game.manager;
 
-import com.luisz.murder.game.manager.body.Body;
+import com.luisz.murder.game.body.Body;
 import com.luisz.murder.game.profile.Profile;
 
 import java.util.ArrayList;

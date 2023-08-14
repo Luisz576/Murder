@@ -52,6 +52,19 @@ public class PlayersManager {
         return this.profiles.remove(player);
     }
 
+    public int getAmountOfPlayers(boolean needBePlayer){
+        if(needBePlayer){
+            int a = 0;
+            for(Profile profile : profiles.values()){
+                if(profile.type.isGamePlayer()){
+                    a++;
+                }
+            }
+            return a;
+        }
+        return this.profiles.size();
+    }
+
     protected Collection<Profile> getAllProfiles(){
         return this.profiles.values();
     }

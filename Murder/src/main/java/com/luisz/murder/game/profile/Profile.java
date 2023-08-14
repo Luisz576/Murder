@@ -1,6 +1,7 @@
 package com.luisz.murder.game.profile;
 
 import com.luisz.lapi.common.language.Language;
+import com.luisz.lapi.nms.NMS;
 import com.luisz.lapi.player.skin.Skin;
 import com.luisz.luisz576api.domain.playerprofile.PlayerProfile;
 import com.luisz.murder.game.data.SkinData;
@@ -74,7 +75,7 @@ public class Profile {
         return this.playerProfile.language;
     }
     public void sendTitle(String title){
-        // TODO
+        NMS.getInstance().sendTitle(this.player, title);
     }
     public void sendMessage(String message){
         this.player.sendMessage(message);

@@ -49,6 +49,10 @@ public class GameRunner implements Runnable{
                     game.runGame();
                     break;
                 }
+                if(game.getAmountOfPlayers(true) < game.arena.MIN_PLAYERS){
+                    timer = game.TIME_TO_START_GAME;
+                    break;
+                }
                 if(timer < 10){
                     List<Tuple<TextsVar, String>> vars = new ArrayList<>();
                     vars.add(new Tuple<>(TextsVar.FIRST_NUMBER, timer + ""));
@@ -64,6 +68,13 @@ public class GameRunner implements Runnable{
             case STOPPING:
                 break;
         }
+        updateScoreboard();
         timer--;
+    }
+
+    private void updateScoreboard(){
+        game.scoreboardManager.data.time(timer);
+
+        game.scoreboardManager.renderForEveryListener();
     }
 }

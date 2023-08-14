@@ -12,6 +12,7 @@ import com.luisz.murder.game.events.PlayerJoinTheGameEvent;
 import com.luisz.murder.game.events.PlayerQuitTheGameEvent;
 import com.luisz.murder.game.manager.*;
 import com.luisz.murder.game.profile.Profile;
+import com.luisz.murder.game.scorerender.MurderScoreRender;
 import com.luisz.murder.language.Texts;
 import com.luisz.murder.language.TextsVar;
 import com.luisz.murder.manager.MurderPluginManager;
@@ -22,6 +23,8 @@ import org.bukkit.entity.Player;
 import java.util.List;
 
 public class Game extends IGame {
+    public final int TIME_TO_START_GAME = 30, TIME_TO_END_GAME = 60 * 10;
+
     private boolean _open = true;
     public final Arena arena;
     private final GameRunner runner;
@@ -29,8 +32,12 @@ public class Game extends IGame {
     public GameState getGameState(){
         return this.runner.getGameState();
     }
+    public final ScoreboardManager scoreboardManager;
     protected final ProfileInventoryManager profileInventoryManager;
     private final PlayersManager playersManager;
+    public int getAmountOfPlayers(boolean needBePlayer){
+        return playersManager.getAmountOfPlayers(needBePlayer);
+    }
     protected final CoinsManager coinsManager;
     private final PlayerSkinsManager playerSkinsManager;
     private final JobsManager jobsManager;
@@ -41,6 +48,7 @@ public class Game extends IGame {
         this.arena = arena;
         this.runner = new GameRunner(this);
         this.playersManager = new PlayersManager(this);
+        this.scoreboardManager = new ScoreboardManager(new MurderScoreRender(), this.playersManager);
         this.playerSkinsManager = new PlayerSkinsManager(arena.getSkins(), this.playersManager);
         this.profileInventoryManager = new ProfileInventoryManager(this, this.playersManager);
         this.jobsManager = new JobsManager(this.playersManager);
@@ -83,6 +91,7 @@ public class Game extends IGame {
     // states
     protected void runGame(){
         this.runner.setGameState(GameState.RUNNING);
+        this.runner.timer = TIME_TO_END_GAME;
         this.teleportManager.spawnEveryone();
         this.jobsManager.giveJobs();
         this.playerSkinsManager.giveRandomSkinsForEveryone();
