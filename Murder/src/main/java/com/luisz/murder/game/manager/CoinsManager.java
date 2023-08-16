@@ -5,6 +5,7 @@ import com.luisz.murder.game.Game;
 import com.luisz.murder.game.events.PlayerPickupCoinEvent;
 import com.luisz.murder.game.profile.Profile;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
@@ -30,8 +31,9 @@ public class CoinsManager {
     public void _gameTick(){
         // TODO
     }
-    private void spawnRandomCoin(){
-
+    private void spawnCoin(ArenaLocation l){
+        Location location = l.getLocation();
+        // TODO spawn
     }
 
     public boolean isCoin(Entity coin){

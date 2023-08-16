@@ -110,8 +110,14 @@ public class Game extends IGame {
     }
 
     public void stopGame(GameStopReason reason){
+        _open = false;
         coinsManager.unspawnAll();
         MurderPluginManager.unregisterListener(gameListener);
+        _sendAPIInfo();
+    }
+
+    private void _sendAPIInfo(){
+        // TODO
     }
 
     @Override

@@ -25,6 +25,11 @@ public enum Texts {
             new Tuple<>(Language.PT, "Vítima"),
             new Tuple<>(Language.ES, "Víctima")
     )),
+    SPECTATOR(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Spectator"),
+            new Tuple<>(Language.PT, "Espectador"),
+            new Tuple<>(Language.ES, "Espectador")
+    )),
     // ITEMS
     ITEM_SWORD(MultipleLanguageString.builder(
             new Tuple<>(Language.EN, "Knife"),
@@ -45,6 +50,12 @@ public enum Texts {
             new Tuple<>(Language.EN, "Coin"),
             new Tuple<>(Language.PT, "Moeda"),
             new Tuple<>(Language.ES, "moneda")
+    )),
+    // SCOREBOARD
+    SCOREBOARD_ROLE_PREFIX(MultipleLanguageString.builder(
+            new Tuple<>(Language.EN, "Role"),
+            new Tuple<>(Language.PT, "Cargo"),
+            new Tuple<>(Language.ES, "Oficina")
     )),
     // GAME_RUNNING
     GAME_RUNNING_PICKUP_COIN(MultipleLanguageString.builder(

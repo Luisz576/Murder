@@ -51,10 +51,12 @@ public class Profile {
             return;
         }
         s.apply(this.player);
+        _updateFakenickname();
     }
     public void updateSkin(SkinData skin){
         this.skin = skin;
         _updateSkin();
+        _updateFakenickname();
     }
     private void _updateSkin(){
         Skin s = Skin.fromName(this.skin.skin);
@@ -63,6 +65,13 @@ public class Profile {
         }
         s.apply(this.player);
         this.player.setDisplayName(this.skin.nickname);
+    }
+    private void _updateFakenickname(){
+        // TODO
+    }
+
+    public MurderStatistics createMurderStatistics(){
+        return new MurderStatistics(this.coins, this.kills);
     }
 
     public Profile(Player player, PlayerProfile playerProfile, boolean isSpectator){
