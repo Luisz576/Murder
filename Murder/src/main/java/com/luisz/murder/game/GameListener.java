@@ -40,6 +40,7 @@ public class GameListener implements Listener {
             List<Tuple<TextsVar, String>> vars = new ArrayList<>();
             vars.add(new Tuple<>(TextsVar.FIRST_PLAYER_NAME, ChatColor.YELLOW + e.profile.player.getName() + messageColor));
             game.sendGameMessageForEveryone(texts, vars, messageColor.toString());
+            // TODO teleport to lobby
         }
     }
 

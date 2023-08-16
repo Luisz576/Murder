@@ -1,10 +1,14 @@
 package com.luisz.murder.game.profile;
 
-public class MurderStatistics {
-    public final int colleted_coins, kills;
+import com.luisz.murder.game.enums.GamePlayerType;
 
-    public MurderStatistics(int colleted_coins, int kills){
-        this.colleted_coins = colleted_coins;
+public class MurderStatistics {
+    public final GamePlayerType playerType;
+    public final int collected_coins, kills;
+
+    public MurderStatistics(GamePlayerType playerType, int collected_coins, int kills){
+        this.playerType = playerType;
+        this.collected_coins = collected_coins;
         this.kills = kills;
     }
 }

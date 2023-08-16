@@ -71,7 +71,7 @@ public class Profile {
     }
 
     public MurderStatistics createMurderStatistics(){
-        return new MurderStatistics(this.coins, this.kills);
+        return new MurderStatistics(this.type, this.coins, this.kills);
     }
 
     public Profile(Player player, PlayerProfile playerProfile, boolean isSpectator){
